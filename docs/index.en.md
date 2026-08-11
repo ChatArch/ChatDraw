@@ -1,12 +1,41 @@
-# ChatDraw Docs
+# ChatDraw Documentation
 
-Long-lived documentation for `ChatDraw` lives here.
+`ChatDraw` is currently the ChatArch Python CLI package shell for drawing-oriented work. The scaffold `hello` command has been removed from the public CLI; the only exposed commands are truthful root-level package information entries. Future drawing capabilities must start with reusable Python APIs and then be reflected in `chatdraw --tree`.
 
-## Local Preview
+## Current entry points
 
-```bash
-pip install -e ".[docs]"
-mkdocs serve
-```
+| Entry point | Purpose |
+|-------------|---------|
+| `chatdraw --help` | Show the current public CLI options. |
+| `chatdraw --version` | Read back the installed package version. |
+| `chatdraw --tree` | Print the real registered CLI tree. |
 
-Chinese version: [index.md](index.md).
+## Documentation map
+
+<div class="grid cards" markdown>
+
+-   :material-console-line: **CLI Tree**
+
+    ---
+
+    Generated from the real Click command surface; confirms no scaffold command remains.
+
+    [Open the CLI Tree](cli-tree.md)
+
+-   :material-package-variant: **Package release contract**
+
+    ---
+
+    Released through Trusted Publishing/OIDC, with documentation unified under the ChatArch public docs domain.
+
+    [PyPI project](https://pypi.org/project/ChatDraw/)
+
+</div>
+
+## Current boundary
+
+- `hello` was a template leftover and has been removed from the public CLI.
+- There are no business subcommands yet; the root-only tree is the truthful state.
+- Any future drawing command must update tests, README, the CLI tree, MkDocs pages, and release notes together.
+
+中文版本可通过页面右上角语言切换进入。
