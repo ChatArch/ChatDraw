@@ -5,24 +5,40 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ChatDraw"
 dynamic = ["version"]
-description = "ChatDraw package"
+description = "ChatArch drawing assistant package shell"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
-dependencies = ["click>=8.0", "chatstyle>=0.1.0", "chatenv>=0.1.1"]
-authors = [{name = "ChatDraw", email = "1073853456@qq.com"}]
-keywords = ["chatdraw", "chatarch", "cli"]
+dependencies = [
+    "click>=8.0,<9.0",
+]
+authors = [{name = "ChatArch", email = "1073853456@qq.com"}]
+keywords = ["chatdraw", "chatarch", "cli", "drawing"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
 
+[project.urls]
+Homepage = "https://github.com/ChatArch/ChatDraw"
+Repository = "https://github.com/ChatArch/ChatDraw"
+Documentation = "https://arch.gh.wzhecnu.cn/ChatDraw/"
+
 [project.scripts]
 chatdraw = "chatdraw.cli:main"
 
 [project.optional-dependencies]
-dev = ["build", "pytest", "twine"]
-docs = ["mkdocs>=1.4.0", "mkdocs-material>=9.0.0", "mike>=2.0.0"]
+dev = [
+    "build>=1.2,<2.0",
+    "pytest>=8.0,<9.0",
+    "twine>=5.0,<7.0",
+]
+docs = [
+    "mkdocs>=1.6,<2.0",
+    "mkdocs-material>=9.5,<10.0",
+    "mkdocs-static-i18n>=1.2,<2.0",
+    "mike>=2.0,<3.0",
+]
 
 [tool.setuptools.dynamic]
 version = {attr = "chatdraw.__version__"}

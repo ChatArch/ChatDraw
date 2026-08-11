@@ -2,48 +2,57 @@
     <a href="https://pypi.python.org/pypi/ChatDraw">
         <img src="https://img.shields.io/pypi/v/ChatDraw.svg" alt="PyPI version" />
     </a>
-    <a href="https://github.com/OWNER/REPO/actions/workflows/ci.yml">
-        <img src="https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg" alt="Tests" />
+    <a href="https://github.com/ChatArch/ChatDraw/actions/workflows/ci.yml">
+        <img src="https://github.com/ChatArch/ChatDraw/actions/workflows/ci.yml/badge.svg" alt="Tests" />
     </a>
-    <a href="https://OWNER.github.io/REPO">
+    <a href="https://arch.gh.wzhecnu.cn/ChatDraw/">
         <img src="https://img.shields.io/badge/docs-mkdocs-blue.svg" alt="Documentation" />
     </a>
 </div>
 
 <div align="center">
 
-[English](README.en.md) | [简体中文](README.md)
+[英文版](README.en.md) | 简体中文
 </div>
 
 # ChatDraw
 
-ChatDraw package
+`ChatDraw` 是 ChatArch 绘图方向的 Python CLI 包壳。当前公开 CLI 已清理模板 `hello` 命令，只保留真实 root-only 包信息入口；后续新增绘图能力时，必须同步 Python API、CLI 树、文档和测试。
 
 ## 快速开始
 
 ```bash
-pip install -e ".[dev]"
-chatdraw hello ChatArch
+pip install ChatDraw
+chatdraw --version
+chatdraw --tree
+```
+
+开发环境：
+
+```bash
+pip install -e ".[dev,docs]"
 python -m pytest -q
+mkdocs build --strict
 python -m build
 ```
 
-## CLI 规范
+## CLI 树
 
-这个模板默认依赖 `chatstyle>=0.1.0` 和 `chatenv>=0.1.1`，新的命令应优先使用：
+```text
+chatdraw # ChatDraw — drawing assistant package shell.
+├── --help # Show this message and exit.
+├── --version # Show the version and exit.
+└── --tree # Print the registered command tree.
+```
 
-- `CommandSchema` / `CommandField` 描述输入。
-- `add_interactive_option()` 提供统一 `-i/-I`。
-- `resolve_command_inputs()` 统一缺参补问、默认值、TTY 与校验。
+`chatdraw hello` 是脚手架残留，已从公开 CLI 删除。
 
-## 目录结构
+## 文档
 
-- `src/`：包源码
-- `tests/code-tests/`：代码测试和历史测试迁移
-- `tests/cli-tests/`：真实 CLI 测试，doc-first
-- `tests/mock-cli-tests/`：mock/fake CLI 测试，doc-first
-- `docs/`：长期维护文档，由 mkdocs 构建
+- 文档首页：https://arch.gh.wzhecnu.cn/ChatDraw/
+- CLI 树：https://arch.gh.wzhecnu.cn/ChatDraw/cli-tree/
+- 英文文档：https://arch.gh.wzhecnu.cn/ChatDraw/en/
 
 ## 开发说明
 
-扩展脚手架前，先阅读 `DEVELOP.md` 和 `AGENTS.md`。
+扩展命令前先阅读 `DEVELOP.md` 和 `AGENTS.md`，并保持 `--tree`、README、MkDocs、测试与 changelog 同步。

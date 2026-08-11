@@ -1,39 +1,38 @@
-"""CLI entrypoint for chatdraw."""
+"""CLI entrypoint for ChatDraw."""
+
+from __future__ import annotations
 
 import click
-from chatstyle import (
-    CommandField,
-    CommandSchema,
-    add_interactive_option,
-    render_success,
-    resolve_command_inputs,
+
+from chatdraw import __version__
+
+
+_TREE = """chatdraw # ChatDraw — drawing assistant package shell.
+├── --help # Show this message and exit.
+├── --version # Show the version and exit.
+└── --tree # Print the registered command tree.
+"""
+
+
+def _print_tree(ctx: click.Context, _param: click.Parameter, value: bool) -> None:
+    if not value or ctx.resilient_parsing:
+        return
+    click.echo(_TREE.rstrip())
+    ctx.exit(0)
+
+
+@click.group(name="chatdraw", invoke_without_command=False)
+@click.version_option(version=__version__, prog_name="chatdraw")
+@click.option(
+    "--tree",
+    is_flag=True,
+    is_eager=True,
+    expose_value=False,
+    callback=_print_tree,
+    help="Print the registered command tree.",
 )
-
-
-HELLO_SCHEMA = CommandSchema(
-    name="hello",
-    fields=(CommandField("name", prompt="name", required=True),),
-)
-
-
-@click.group()
 def main() -> None:
-    """chatdraw command line interface."""
-
-
-@main.command()
-@click.argument("name", required=False)
-@add_interactive_option
-def hello(name: str | None, interactive: bool | None) -> None:
-    """Print a greeting with ChatStyle-backed input resolution."""
-
-    values = resolve_command_inputs(
-        schema=HELLO_SCHEMA,
-        provided={"name": name},
-        interactive=interactive,
-        usage="Usage: chatdraw hello [NAME]",
-    )
-    render_success(f"Hello, {values['name']}!")
+    """ChatDraw drawing assistant package shell."""
 
 
 if __name__ == "__main__":

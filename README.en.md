@@ -2,48 +2,57 @@
     <a href="https://pypi.python.org/pypi/ChatDraw">
         <img src="https://img.shields.io/pypi/v/ChatDraw.svg" alt="PyPI version" />
     </a>
-    <a href="https://github.com/OWNER/REPO/actions/workflows/ci.yml">
-        <img src="https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg" alt="Tests" />
+    <a href="https://github.com/ChatArch/ChatDraw/actions/workflows/ci.yml">
+        <img src="https://github.com/ChatArch/ChatDraw/actions/workflows/ci.yml/badge.svg" alt="Tests" />
     </a>
-    <a href="https://OWNER.github.io/REPO">
+    <a href="https://arch.gh.wzhecnu.cn/ChatDraw/">
         <img src="https://img.shields.io/badge/docs-mkdocs-blue.svg" alt="Documentation" />
     </a>
 </div>
 
 <div align="center">
 
-[English](README.en.md) | [简体中文](README.md)
+English | [简体中文](README.md)
 </div>
 
 # ChatDraw
 
-ChatDraw package
+`ChatDraw` is the ChatArch Python CLI package shell for drawing-oriented work. The public CLI has removed the template `hello` command and now exposes only truthful root-level package information entries. Future drawing capabilities must update the Python API, CLI tree, docs, and tests together.
 
 ## Quick Start
 
 ```bash
-pip install -e ".[dev]"
-chatdraw hello ChatArch
+pip install ChatDraw
+chatdraw --version
+chatdraw --tree
+```
+
+Development environment:
+
+```bash
+pip install -e ".[dev,docs]"
 python -m pytest -q
+mkdocs build --strict
 python -m build
 ```
 
-## CLI Contract
+## CLI Tree
 
-This template depends on `chatstyle>=0.1.0` and `chatenv>=0.1.1`. New commands should prefer:
+```text
+chatdraw # ChatDraw — drawing assistant package shell.
+├── --help # Show this message and exit.
+├── --version # Show the version and exit.
+└── --tree # Print the registered command tree.
+```
 
-- `CommandSchema` / `CommandField` for inputs.
-- `add_interactive_option()` for the shared `-i/-I` switch.
-- `resolve_command_inputs()` for missing args, defaults, TTY behavior, and validation.
+`chatdraw hello` was a scaffold leftover and has been removed from the public CLI.
 
-## Layout
+## Documentation
 
-- `src/`: package source code
-- `tests/code-tests/`: code tests and migrated historical tests
-- `tests/cli-tests/`: real CLI tests, doc-first
-- `tests/mock-cli-tests/`: mock/fake CLI tests, doc-first
-- `docs/`: long-lived project docs built by mkdocs
+- Documentation home: https://arch.gh.wzhecnu.cn/ChatDraw/
+- CLI tree: https://arch.gh.wzhecnu.cn/ChatDraw/cli-tree/
+- English docs: https://arch.gh.wzhecnu.cn/ChatDraw/en/
 
 ## Development Notes
 
-See `DEVELOP.md` and `AGENTS.md` before expanding the scaffold.
+Read `DEVELOP.md` and `AGENTS.md` before expanding commands, and keep `--tree`, README, MkDocs, tests, and changelog synchronized.
