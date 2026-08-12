@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - 2026-08-12
+
+### Changed
+
+- 将 `chatdraw --tree` 从静态字符串改为由 Click command surface 渲染，避免 CLI 和文档树漂移。
+- 同步版本测试与发布 workflow guard，准备 `0.1.2` patch release。
+
 ## 0.1.1 - 2026-08-12
 
 ### Changed
@@ -15,4 +22,4 @@
 ### Changed
 
 - 准备 `0.1.0` 发版，用于验证 PyPI Trusted Publishing 免 token 发布流程。
-- 发布 workflow 使用显式 `v*` tag / `workflow_dispatch` 触发，使用 PyPI Trusted Publishing（`id-token: write` + `environment: pypi`），不依赖仓库级 PyPI token secret。
+- 发布 workflow 使用显式 `v*` tag 与当时的手动触发入口，使用 PyPI Trusted Publishing（`id-token: write` 加 GitHub 环境名 `pypi`），不依赖仓库级 PyPI token secret。

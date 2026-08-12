@@ -2,37 +2,59 @@
 
 from __future__ import annotations
 
+import inspect
+from typing import cast
+
 import click
 
 from chatdraw import __version__
 
 
-_TREE = """chatdraw # ChatDraw — drawing assistant package shell.
-├── --help # Show this message and exit.
-├── --version # Show the version and exit.
-└── --tree # Print the registered command tree.
-"""
+def _purpose(command: click.Command) -> str:
+    text = command.short_help or inspect.getdoc(command.callback) or ""
+    return " ".join(text.strip().split()).rstrip(".")
 
 
-def _print_tree(ctx: click.Context, _param: click.Parameter, value: bool) -> None:
-    if not value or ctx.resilient_parsing:
-        return
-    click.echo(_TREE.rstrip())
-    ctx.exit(0)
+def _render_cli_tree(root: click.Group) -> str:
+    """Render the CLI tree from the registered Click command surface."""
+
+    children = [(name, command) for name, command in root.commands.items() if not command.hidden]
+    lines = [f"chatdraw  # {_purpose(root)}"]
+    root_entries = [
+        ("--help", "show command help"),
+        ("--version", "show the installed package version"),
+        ("--tree", "show this CLI tree"),
+    ]
+    for index, (option, purpose) in enumerate(root_entries):
+        connector = "└──" if not children and index == len(root_entries) - 1 else "├──"
+        lines.append(f"{connector} {option}  # {purpose}")
+    for index, (name, command) in enumerate(children):
+        connector = "└──" if index == len(children) - 1 else "├──"
+        lines.append(f"{connector} {name}  # {_purpose(command)}")
+    return "\n".join(lines)
 
 
-@click.group(name="chatdraw", invoke_without_command=False)
+@click.group(
+    name="chatdraw",
+    invoke_without_command=True,
+    no_args_is_help=True,
+    context_settings={"help_option_names": ["-h", "--help"]},
+)
 @click.version_option(version=__version__, prog_name="chatdraw")
 @click.option(
     "--tree",
+    "show_tree",
     is_flag=True,
     is_eager=True,
-    expose_value=False,
-    callback=_print_tree,
-    help="Print the registered command tree.",
+    help="Show this CLI tree.",
 )
-def main() -> None:
+@click.pass_context
+def main(ctx: click.Context, show_tree: bool) -> None:
     """ChatDraw drawing assistant package shell."""
+
+    if show_tree:
+        click.echo(_render_cli_tree(cast(click.Group, ctx.command)))
+        ctx.exit(0)
 
 
 if __name__ == "__main__":
