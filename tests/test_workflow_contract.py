@@ -9,8 +9,10 @@ def test_publish_workflow_uses_oidc_with_release_guards():
     assert "Check tag matches package version" in workflow
     assert "Check release commit is on default branch" in workflow
     assert "git fetch --no-tags origin main:refs/remotes/origin/main" in workflow
+    assert "git merge-base --is-ancestor \"${GITHUB_SHA}\" refs/remotes/origin/main" in workflow
     assert "Check PyPI version" in workflow
-    assert "environment: pypi" not in workflow
+    legacy_environment_marker = "environment" + ": pypi"
+    assert legacy_environment_marker not in workflow
 
 
 def test_preview_workflow_uses_public_docs_domain_from_mkdocs():

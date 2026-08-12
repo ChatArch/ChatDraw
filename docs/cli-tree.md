@@ -5,10 +5,10 @@
 ## 顶层命令
 
 ```text
-chatdraw # ChatDraw — drawing assistant package shell.
-├── --help # Show this message and exit.
-├── --version # Show the version and exit.
-└── --tree # Print the registered command tree.
+chatdraw  # ChatDraw drawing assistant package shell
+├── --help  # show command help
+├── --version  # show the installed package version
+└── --tree  # show this CLI tree
 ```
 
 ## 状态契约
