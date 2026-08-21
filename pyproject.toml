@@ -11,6 +11,7 @@ requires-python = ">=3.10"
 license = "MIT"
 dependencies = [
     "click>=8.0,<9.0",
+    "chatstyle>=0.2.0,<0.3.0",
 ]
 authors = [{name = "ChatArch", email = "1073853456@qq.com"}]
 keywords = ["chatdraw", "chatarch", "cli", "drawing"]
@@ -35,7 +36,7 @@ dev = [
 ]
 docs = [
     "mkdocs>=1.6,<2.0",
-    "mkdocs-material>=9.5,<10.0",
+    "mkdocs-material>=9.5,<9.7",
     "mkdocs-static-i18n>=1.2,<2.0",
     "mike>=2.0,<3.0",
 ]

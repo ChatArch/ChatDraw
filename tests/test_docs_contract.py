@@ -16,7 +16,10 @@ def test_mkdocs_uses_chatarch_public_domain_material_i18n_and_renderer():
 
 
 def test_bilingual_cli_tree_docs_exist():
-    assert Path("docs/cli-tree.md").exists()
-    assert Path("docs/cli-tree.en.md").exists()
-    assert "chatdraw --tree" in Path("docs/cli-tree.md").read_text(encoding="utf-8")
-    assert "chatdraw --tree" in Path("docs/cli-tree.en.md").read_text(encoding="utf-8")
+    for path in (Path("docs/cli-tree.md"), Path("docs/cli-tree.en.md")):
+        assert path.exists()
+        text = path.read_text(encoding="utf-8")
+        assert "chatstyle.add_tree_option()" in text
+        assert "chatdraw --tree" in text
+        assert "chatdraw --tree-brief" in text
+        assert "└── --tree-brief" in text

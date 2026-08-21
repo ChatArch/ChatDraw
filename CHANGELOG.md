@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3 - 2026-08-21
+
+### Changed
+
+- 使用 `chatstyle>=0.2.0,<0.3.0` 的 `add_tree_option()` 替换包内 Click tree renderer，并固定公开根命令名为 `chatdraw`。
+- 新增 `chatdraw --tree-brief`，默认 `--tree` 保留参数签名，brief 输出省略参数签名。
+- 同步版本、CLI 测试、中英文文档、开发约定与 CI 的已安装 console-script/build/check 验收。
+
 ## 0.1.2 - 2026-08-12
 
 ### Changed
