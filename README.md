@@ -25,6 +25,7 @@
 pip install ChatDraw
 chatdraw --version
 chatdraw --tree
+chatdraw --tree-brief
 ```
 
 开发环境：
@@ -39,11 +40,14 @@ python -m build
 ## CLI 树
 
 ```text
-chatdraw  # ChatDraw drawing assistant package shell
-├── --help  # show command help
-├── --version  # show the installed package version
-└── --tree  # show this CLI tree
+chatdraw
+├── --help  # Show this message and exit.
+├── --version  # Show the version and exit.
+├── --tree  # Print the registered CLI tree and exit.
+└── --tree-brief  # Print the registered CLI tree without parameter signatures and exit.
 ```
+
+CLI 使用 `chatstyle.add_tree_option()` 从真实 Click registry 渲染。`--tree` 默认保留命令参数签名，`--tree-brief` 保留同一组节点和说明但省略签名；当前没有业务子命令，所以两种输出相同。
 
 `chatdraw hello` 是脚手架残留，已从公开 CLI 删除。
 
@@ -55,4 +59,4 @@ chatdraw  # ChatDraw drawing assistant package shell
 
 ## 开发说明
 
-扩展命令前先阅读 `DEVELOP.md` 和 `AGENTS.md`，并保持 `--tree`、README、MkDocs、测试与 changelog 同步。
+扩展命令前先阅读 `DEVELOP.md` 和 `AGENTS.md`，并保持 `--tree`、`--tree-brief`、README、MkDocs、测试与 changelog 同步。

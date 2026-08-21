@@ -25,6 +25,7 @@ English | [简体中文](README.md)
 pip install ChatDraw
 chatdraw --version
 chatdraw --tree
+chatdraw --tree-brief
 ```
 
 Development environment:
@@ -39,11 +40,14 @@ python -m build
 ## CLI Tree
 
 ```text
-chatdraw  # ChatDraw drawing assistant package shell
-├── --help  # show command help
-├── --version  # show the installed package version
-└── --tree  # show this CLI tree
+chatdraw
+├── --help  # Show this message and exit.
+├── --version  # Show the version and exit.
+├── --tree  # Print the registered CLI tree and exit.
+└── --tree-brief  # Print the registered CLI tree without parameter signatures and exit.
 ```
+
+The CLI uses `chatstyle.add_tree_option()` to render the real Click registry. `--tree` keeps command parameter signatures by default, while `--tree-brief` keeps the same nodes and descriptions without signatures. The outputs are currently identical because there are no business subcommands.
 
 `chatdraw hello` was a scaffold leftover and has been removed from the public CLI.
 
@@ -55,4 +59,4 @@ chatdraw  # ChatDraw drawing assistant package shell
 
 ## Development Notes
 
-Read `DEVELOP.md` and `AGENTS.md` before expanding commands, and keep `--tree`, README, MkDocs, tests, and changelog synchronized.
+Read `DEVELOP.md` and `AGENTS.md` before expanding commands, and keep `--tree`, `--tree-brief`, README, MkDocs, tests, and changelog synchronized.

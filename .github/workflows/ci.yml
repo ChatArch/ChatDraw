@@ -24,5 +24,7 @@ jobs:
       - run: python -m pytest -q
       - run: chatdraw --version
       - run: chatdraw --tree
+      - run: chatdraw --tree-brief
       - run: python -m build
+      - run: python -m twine check dist/*
       - run: mkdocs build --strict

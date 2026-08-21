@@ -15,6 +15,16 @@ def test_publish_workflow_uses_oidc_with_release_guards():
     assert legacy_environment_marker not in workflow
 
 
+def test_ci_checks_installed_cli_and_distribution_contract():
+    workflow = Path(".github/workflows/ci.yml").read_text(encoding="utf-8")
+
+    assert "chatdraw --version" in workflow
+    assert "chatdraw --tree" in workflow
+    assert "chatdraw --tree-brief" in workflow
+    assert "python -m build" in workflow
+    assert "python -m twine check dist/*" in workflow
+
+
 def test_preview_workflow_uses_public_docs_domain_from_mkdocs():
     workflow = Path(".github/workflows/preview.yaml").read_text(encoding="utf-8")
 
